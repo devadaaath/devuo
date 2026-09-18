@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>For Devatheertha 💗</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Quicksand:wght@400;500;600;700&family=Manjari:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --wine:#7a1530;
+    --red:#c9184a;
+    --rose:#ff4d6d;
+    --pink:#ff8fa3;
+    --pink-soft:#ffb3c6;
+    --pink-pale:#ffe0e9;
+    --cream:#fff3f6;
+    --ink:#4a0e21;
+    --ease: cubic-bezier(.22,.61,.36,1);
+  }
+
+  *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+  html{
+    scroll-snap-type: y proximity;
+    scroll-behavior:smooth;
+  }
+
+  body{
+    margin:0;
+    font-family:'Quicksand', sans-serif;
+    background:#000;
+    color:var(--cream);
+    overflow-x:hidden;
+  }
+
+  section{
+    min-height:100vh;
+    width:100%;
+    scroll-snap-align:start;
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding: 6vh 6vw;
+    text-align:center;
+  }
+
+  /* ---------- shared heart shape ---------- */
+  .heart-icon{
+    display:inline-block;
+    width:1em; height:1em;
+    position:relative;
+  }
+  .heart-icon::before,
+  .heart-icon::after{
+    content:"";
+    position:absolute;
+    top:0; left:0.5em;
+    width:0.5em; height:0.8em;
+    background:currentColor;
+    border-radius:0.5em 0.5em 0 0;
+    transform-origin:0 100%;
+    transform:rotate(-45deg);
+  }
+  .heart-icon::after{
+    left:0;
+    transform-origin:100% 100%;
+    transform:rotate(45deg);
+  }
+
+  /* ---------- INTRO ---------- */
+  #intro{
+    background: radial-gradient(circle at 50% 42%, #23030c 0%, #0c0004 55%, #000 100%);
+    scroll-snap-align:none;
+    animation: intro-hide 0s 3.6s forwards;
+  }
+  @keyframes intro-hide{ to{ visibility:hidden; position:absolute; } }
+
+  .intro-inner{
+    animation: intro-fade 3.6s var(--ease) forwards;
+  }
+  @keyframes intro-fade{
+    0%{ opacity:0; transform:translateY(14px) scale(.97); }
+    18%{ opacity:1; transform:translateY(0) scale(1); }
+    78%{ opacity:1; transform:translateY(0) scale(1); }
+    100%{ opacity:0; transform:translateY(-10px) scale(1.02); }
+  }
+  .intro-eyebrow{
+    font-family:'Dancing Script', cursive;
+    font-size:clamp(1.3rem,4vw,2rem);
+    color:var(--pink-soft);
+    margin:0 0 .4rem;
+  }
+  .intro-title{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-weight:600;
+    font-size:clamp(1.8rem,7vw,3.4rem);
+    color:#ffe3ea;
+    margin:0;
+    letter-spacing:.02em;
+    text-shadow: 0 0 22px rgba(255,20,60,.35);
+  }
+  .intro-title .name{
+    color:var(--rose);
+    font-style:normal;
+  }
+  .intro-pulse{
+    margin-top:1.4rem;
+    color:var(--rose);
+    font-size:1.6rem;
+    animation: beat 1.15s ease-in-out infinite;
+  }
+  @keyframes beat{
+    0%,100%{ transform:scale(1); }
+    25%{ transform:scale(1.18); }
+    40%{ transform:scale(0.96); }
+    55%{ transform:scale(1.12); }
+  }
+
+  /* ---------- HEART SCENE (dark, glowing, text-filled) ---------- */
+  #heart-scene{
+    background: radial-gradient(120% 90% at 50% 40%, #1a0208 0%, #0b0004 55%, #000000 100%);
+    overflow:hidden;
+    color:#fff;
+  }
+
+  .floaters{
+    position:absolute; inset:0;
+    pointer-events:none;
+    overflow:hidden;
+  }
+  .floaters span{
+    position:absolute;
+    bottom:-8%;
+    color:var(--rose);
+    opacity:.55;
+    font-size: var(--s, 1.2rem);
+    left: var(--x, 10%);
+    animation: float-up var(--d, 12s) linear infinite;
+    animation-delay: var(--delay, 0s);
+  }
+  @keyframes float-up{
+    0%{ transform:translateY(0) translateX(0) rotate(0deg); opacity:0; }
+    10%{ opacity:.6; }
+    90%{ opacity:.35; }
+    100%{ transform:translateY(-115vh) translateX(var(--drift,20px)) rotate(25deg); opacity:0; }
+  }
+
+  .heart-wrap{
+    position:relative;
+    width:min(92vw, 420px);
+    aspect-ratio:1/1;
+    margin:0 auto;
+  }
+
+  .glow{
+    position:absolute; inset:-14%;
+    background: radial-gradient(circle, rgba(255,20,60,.45) 0%, rgba(255,20,60,0) 68%);
+    border-radius:50%;
+    animation: pulse-glow 2.6s ease-in-out infinite;
+  }
+  @keyframes pulse-glow{
+    0%,100%{ transform:scale(1); opacity:.65; }
+    50%{ transform:scale(1.14); opacity:1; }
+  }
+
+  .heart-shape{
+    position:absolute; inset:0;
+    animation: pulse-heart 1.35s ease-in-out infinite;
+    transform-origin:50% 52%;
+  }
+  @keyframes pulse-heart{
+    0%,100%{ transform:scale(1); }
+    22%{ transform:scale(1.055); }
+    38%{ transform:scale(0.985); }
+    55%{ transform:scale(1.03); }
+  }
+
+  .word-ring{
+    position:absolute; inset:0;
+  }
+  .word-ring span{
+    position:absolute;
+    transform:translate(-50%,-50%);
+    font-family:'Quicksand', sans-serif;
+    font-weight:600;
+    letter-spacing:.02em;
+    white-space:nowrap;
+    opacity:0;
+    animation: word-in .6s var(--ease) forwards;
+    animation-delay: var(--wd, 0s);
+  }
+  .word-ring span.edge{
+    font-weight:700;
+    color:#ff8fa8;
+    text-shadow: 0 0 6px rgba(255,60,100,.8), 0 0 1px #fff;
+  }
+  .word-ring span.fill{
+    color:#e6003f;
+    text-shadow: 0 0 4px rgba(255,20,60,.55);
+  }
+  @keyframes word-in{
+    from{ opacity:0; transform:translate(-50%,-50%) scale(.4); }
+    to{ opacity:1; transform:translate(-50%,-50%) scale(1); }
+  }
+
+  .heart-center{
+    position:absolute;
+    left:50%; top:52%;
+    transform:translate(-50%,-50%);
+    z-index:3;
+    text-align:center;
+    pointer-events:none;
+  }
+  .heart-center::before{
+    content:"";
+    position:absolute;
+    inset:-60% -90%;
+    background: radial-gradient(circle, rgba(0,0,0,.55) 0%, rgba(0,0,0,0) 72%);
+    z-index:-1;
+  }
+  .heart-center .lv{
+    font-family:'Dancing Script', cursive;
+    font-weight:700;
+    font-size:clamp(1.7rem, 8vw, 2.9rem);
+    color:#fff;
+    text-shadow: 0 0 14px rgba(255,90,120,.9), 0 0 30px rgba(255,20,60,.6);
+    animation: center-beat 1.35s ease-in-out infinite;
+    display:inline-block;
+  }
+  @keyframes center-beat{
+    0%,100%{ transform:scale(1); }
+    22%{ transform:scale(1.09); }
+    38%{ transform:scale(0.98); }
+  }
+
+  .scene-title{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    color:#ffd6df;
+    font-size:clamp(1.2rem,4.5vw,1.9rem);
+    margin: 1.8rem 0 .3rem;
+    text-shadow: 0 0 18px rgba(255,20,60,.35);
+  }
+  .scene-sub{
+    font-family:'Dancing Script', cursive;
+    color:var(--rose);
+    font-size:clamp(1.1rem,3.4vw,1.5rem);
+    margin:0 0 1.6rem;
+  }
+
+  .cta{
+    display:inline-flex;
+    align-items:center;
+    gap:.5rem;
+    background: linear-gradient(135deg,var(--rose),var(--red));
+    color:#fff;
+    border:none;
+    padding:.85rem 1.7rem;
+    border-radius:999px;
+    font-family:'Quicksand',sans-serif;
+    font-weight:600;
+    font-size:1rem;
+    text-decoration:none;
+    box-shadow:0 10px 26px -6px rgba(255,20,60,.6);
+    transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+  }
+  .cta:active{ transform:scale(.96); }
+
+  .scroll-hint{
+    position:absolute;
+    bottom:5vh;
+    left:50%;
+    transform:translateX(-50%);
+    color:var(--rose);
+    font-size:1.6rem;
+    animation: hint-bob 1.8s ease-in-out infinite;
+    opacity:.8;
+  }
+  @keyframes hint-bob{
+    0%,100%{ transform:translate(-50%,0); }
+    50%{ transform:translate(-50%,8px); }
+  }
+
+  /* ---------- MUSIC TOGGLE ---------- */
+  .music-btn{
+    position:fixed;
+    right:18px;
+    bottom:18px;
+    z-index:50;
+    width:52px; height:52px;
+    border-radius:50%;
+    border:none;
+    background: linear-gradient(135deg,var(--rose),var(--red));
+    color:#fff;
+    font-size:1.3rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 10px 24px -8px rgba(201,24,74,.6);
+    cursor:pointer;
+  }
+  .music-btn .bars{
+    display:inline-flex;
+    align-items:flex-end;
+    gap:2px;
+    height:14px;
+  }
+  .music-btn .bars i{
+    display:block;
+    width:3px;
+    background:#fff;
+    border-radius:2px;
+    animation: bar-bounce 1s ease-in-out infinite;
+  }
+  .music-btn.paused .bars i{ animation-play-state:paused; height:4px !important; }
+  .music-btn .bars i:nth-child(1){ animation-delay:0s; }
+  .music-btn .bars i:nth-child(2){ animation-delay:.2s; }
+  .music-btn .bars i:nth-child(3){ animation-delay:.4s; }
+  @keyframes bar-bounce{
+    0%,100%{ height:5px; }
+    50%{ height:14px; }
+  }
+
+  /* ---------- LETTER ---------- */
+  #letter{
+    background: radial-gradient(120% 90% at 50% 30%, #1c030b 0%, #0a0004 55%, #000 100%);
+    padding-top:8vh;
+    padding-bottom:8vh;
+  }
+
+  .letter-heading{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    color:#ffd6e0;
+    font-size:clamp(1.4rem,5vw,2.1rem);
+    margin: 0 0 1.6rem;
+    text-shadow: 0 0 16px rgba(255,20,60,.3);
+  }
+
+  .envelope{
+    width:min(78vw, 260px);
+    cursor:pointer;
+    user-select:none;
+    -webkit-user-select:none;
+    perspective:600px;
+  }
+  .envelope svg{ width:100%; display:block; filter: drop-shadow(0 12px 26px rgba(255,20,60,.35)); }
+  .envelope-flap{
+    transform-origin:50% 0%;
+    transition: transform .6s var(--ease);
+  }
+  .envelope.open .envelope-flap{ transform: rotateX(180deg); }
+
+  .envelope-tap{
+    margin-top:1rem;
+    font-family:'Dancing Script', cursive;
+    color:var(--rose);
+    font-size:1.25rem;
+    animation: hint-bob 2s ease-in-out infinite;
+  }
+  .envelope.open ~ .envelope-tap{ display:none; }
+
+  .letter-card{
+    max-width:580px;
+    width:100%;
+    margin-top:2rem;
+    background: linear-gradient(180deg, rgba(40,4,14,.75), rgba(20,1,7,.85));
+    border-radius:22px;
+    padding: clamp(1.6rem,5vw,2.6rem);
+    box-shadow: 0 20px 50px -18px rgba(255,20,60,.35);
+    border:1px solid rgba(255,143,168,.25);
+    max-height:0;
+    overflow:hidden;
+    opacity:0;
+    transition: max-height 1s var(--ease), opacity .9s ease, padding .8s var(--ease), margin .8s var(--ease);
+  }
+  .letter-card.show{
+    max-height:1400px;
+    opacity:1;
+  }
+
+  .letter-greet{
+    font-family:'Dancing Script', cursive;
+    font-weight:700;
+    font-size:clamp(1.6rem,5.5vw,2.2rem);
+    color:var(--rose);
+    margin:0 0 1.2rem;
+  }
+
+  .letter-ml{
+    font-family:'Manjari', sans-serif;
+    font-size:clamp(1.05rem,3.6vw,1.28rem);
+    line-height:1.9;
+    color:#ffe9ee;
+    text-align:left;
+    margin:0 0 1.1rem;
+  }
+  .letter-ml.strong{ font-weight:700; }
+
+  .letter-to{
+    font-family:'Manjari', sans-serif;
+    font-weight:700;
+    font-size:clamp(1.1rem,3.8vw,1.35rem);
+    color:var(--pink-soft);
+    text-align:left;
+    margin: 1.4rem 0 .3rem;
+  }
+
+  .letter-sign{
+    font-family:'Dancing Script', cursive;
+    font-weight:700;
+    font-size:clamp(1.7rem,6vw,2.4rem);
+    color:var(--rose);
+    text-align:right;
+    margin-top:1rem;
+  }
+
+  .divider{
+    width:70px; height:2px;
+    margin:1.5rem auto;
+    background: linear-gradient(90deg, transparent, var(--rose), transparent);
+    border:none;
+  }
+
+  /* ---------- BOUQUET (closing scene) ---------- */
+  #bouquet{
+    background: radial-gradient(120% 90% at 50% 60%, #1a0208 0%, #0b0004 55%, #000 100%);
+  }
+  .bouquet-heading{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    color:#ffd6e0;
+    font-size:clamp(1.3rem,4.8vw,2rem);
+    margin:0 0 1.4rem;
+    text-shadow: 0 0 16px rgba(255,20,60,.3);
+  }
+  .bouquet-wrap{
+    width:min(80vw, 320px);
+  }
+  .bouquet-wrap svg{ width:100%; display:block; overflow:visible; }
+
+  .bq-line{
+    fill:none;
+    stroke-width:3;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke-dasharray:340;
+    stroke-dashoffset:340;
+    animation: bq-draw 1.6s var(--ease) forwards;
+    animation-play-state: paused;
+  }
+  .bq-petal{
+    fill:currentColor;
+    stroke:currentColor;
+    fill-opacity:0;
+    stroke-width:2.4;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke-dasharray:140;
+    stroke-dashoffset:140;
+    animation: bq-draw 1s var(--ease) forwards, bq-fill 1s ease forwards;
+    animation-play-state: paused;
+  }
+  @keyframes bq-draw{ to{ stroke-dashoffset:0; } }
+  @keyframes bq-fill{ to{ fill-opacity:1; } }
+
+  .bouquet-sub{
+    font-family:'Dancing Script', cursive;
+    color:var(--rose);
+    font-size:clamp(1.1rem,3.6vw,1.5rem);
+    margin-top:1.6rem;
+    opacity:0;
+    animation: word-in 1s var(--ease) forwards;
+    animation-delay:3.1s;
+    animation-play-state: paused;
+  }
+
+  /* animations only start once #bouquet has scrolled into view (JS adds .in-view) */
+  #bouquet.in-view .bq-line,
+  #bouquet.in-view .bq-petal,
+  #bouquet.in-view .bouquet-sub{
+    animation-play-state: running;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:.001s !important; animation-iteration-count:1 !important; transition-duration:.001s !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= INTRO ================= -->
+<section id="intro">
+  <div class="intro-inner">
+    <p class="intro-eyebrow">a little something for</p>
+    <h1 class="intro-title">my <span class="name">Devatheertha</span></h1>
+    <div class="intro-pulse"><span class="heart-icon"></span></div>
+  </div>
+</section>
+
+<!-- ================= HEART SCENE ================= -->
+<section id="heart-scene">
+  <div class="floaters" id="floaters"></div>
+
+  <div class="heart-wrap">
+    <div class="glow"></div>
+    <div class="heart-shape">
+      <div class="word-ring" id="wordRing"></div>
+      <div class="heart-center"><span class="lv">Love you</span></div>
+    </div>
+  </div>
+
+  <h2 class="scene-title">every beat says your name</h2>
+  <p class="scene-sub">i love you, i love you, i love you</p>
+  <a href="#letter" class="cta"><span class="heart-icon"></span> read my letter</a>
+
+  <div class="scroll-hint">⌄</div>
+</section>
+
+<audio id="bgm" loop preload="none">
+  <source src="deva.song.mp3" type="audio/mpeg">
+</audio>
+<button class="music-btn paused" id="musicBtn" aria-label="Play music">
+  <span class="bars"><i></i><i></i><i></i></span>
+</button>
+
+<!-- ================= LETTER ================= -->
+<section id="letter">
+  <h2 class="letter-heading">a letter, just for you</h2>
+
+  <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Open the letter">
+    <svg viewBox="0 0 200 140">
+      <rect x="4" y="14" width="192" height="122" rx="10" fill="#ffb3c6"/>
+      <path d="M4 24 L100 88 L196 24" stroke="#fff0f4" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <g class="envelope-flap">
+        <path d="M4 24 Q100 -6 196 24 L100 88 Z" fill="#ff4d6d"/>
+      </g>
+      <path d="M78 60 c-6-8 4-16 12-8 c2 2 3 4 3 4 s1-2 3-4 c8-8 18 0 12 8 c-5 7-15 14-15 14 s-10-7-15-14z" fill="#fff"/>
+    </svg>
+  </div>
+  <p class="envelope-tap">tap the envelope to open ✉️</p>
+
+  <article class="letter-card" id="letterCard">
+    <p class="letter-greet">Oi myy lovveyyy,</p>
+
+    <p class="letter-ml">ഞാനിത് എഴുതുന്നത് നിന്നെ മിസ്സ് ചെയ്യുന്നതുകൊണ്ടാണ്.. എൻറെ ജീവിതത്തിലെ ഓരോ ദിവസവും തുടങ്ങുമ്പോഴും അവസാനിക്കുമ്പോഴും എൻറെ ആദ്യത്തെയും അവസാനത്തെയും ചിന്തയാണ് നീ.. ആ നിന്നെ കാണാൻ കഴിയാതെയുള്ള ഈ ജീവിതം നന്നേ മടുപ്പുള്ളതാണ്....</p>
+
+    <p class="letter-ml">ഈ ജീവിതയാത്ര ആരോടൊപ്പം എന്ന ചോദ്യത്തിൽ എനിക്ക് ഒരു ഉത്തരം മാത്രമേ ഉള്ളൂ. ആ ഉത്തരമാണ് നീ...</p>
+
+    <hr class="divider">
+
+    <p class="letter-to">പ്രിയപ്പെട്ടവൾ Devatheertha ക്ക്..</p>
+    <p class="letter-sign">~ devadath</p>
+  </article>
+</section>
+
+<!-- ================= BOUQUET (closing scene) ================= -->
+<section id="bouquet">
+  <h2 class="bouquet-heading">for you</h2>
+
+  <div class="bouquet-wrap">
+    <svg viewBox="0 0 300 380" xmlns="http://www.w3.org/2000/svg">
+      <!-- stems -->
+      <path class="bq-line" stroke="#6a9a5e" style="animation-delay:.05s" d="M150,360 C140,300 112,245 112,150"/>
+      <path class="bq-line" stroke="#6a9a5e" style="animation-delay:.2s"  d="M150,360 C150,280 150,180 150,86"/>
+      <path class="bq-line" stroke="#6a9a5e" style="animation-delay:.35s" d="M150,360 C160,300 188,245 188,150"/>
+
+      <!-- leaves -->
+      <g style="color:#6a9a5e">
+        <path class="bq-petal" style="animation-delay:.95s" transform="translate(118,255) rotate(-35)" d="M0,0 C14,-11 30,-8 38,0 C30,8 14,10 0,0 Z"/>
+        <path class="bq-petal" style="animation-delay:1.05s" transform="translate(182,250) rotate(215) scale(-1,1)" d="M0,0 C14,-11 30,-8 38,0 C30,8 14,10 0,0 Z"/>
+        <path class="bq-petal" style="animation-delay:1.15s" transform="translate(150,305) rotate(90)" d="M0,0 C12,-9 24,-6 30,0 C24,7 12,8 0,0 Z"/>
+      </g>
+
+      <!-- flower 1 -->
+      <g style="color:#ff9db2" transform="translate(112,150) scale(.85)">
+        <path class="bq-petal" style="animation-delay:1.40s" transform="rotate(0)"   d="M0,0 C-8,-14 -8,-34 0,-42 C8,-34 8,-14 0,0 Z"/>
+        <path class="bq-petal" style="animation-delay:1.48s" transform="rotate(60)"  d="M0,0 C-8,-14 -8,-34 0,-42 C8,-34 8,-14 0,0 Z"/>
+        <path class="bq-petal" style="animation-delay:1.56s" transform="rotate(120)" d="M0,0 C-8,-14 -8,-34 0,-42 C8,-34 8,-14 0,0 Z"/>
+        <path class="bq-petal" style="animation-delay:1.64s" transform="rotate(180)" d="M0,0 C-8,-14 -8,-34 0,-42 C8,-34 8,-14 0,0 Z"/>
+        <path class="bq-petal" style="animation-delay:1.72s" transform="rotate(240)" d="M0,0 C-8,-14 -8,-34 0,-42 C8,-34 8,-14 0,0 Z"/>
+        <path class="bq-petal" style="animation-delay:1.80s" transform="rotate(300)" d="M0,0 C-8,-14 -8,-34 0,-42 C8,-34 8,-14 0,0 Z"/>
+        <circle class="bq-petal" style="animation-delay:1.9s" r="8"/>
+      </g>
+
+      <!-- flower 2 (blooms slightly after flower 1) -->
+      <g style="color:#ff4d6d" transform="translate(150,86)">
+        <path class="bq-petal" style="animation-delay:1.70s" transform="rotate(0)"   d="M0,0 C-8,-14 -8,-34 0,-42 C8,-34 8,-14 0,0 Z"/>
+        <path class="bq-petal" style="animation-delay:1.78s" transform="rotate(60)"  d="M0,0 C-8,-14 -8,-34 0,-42 C8,-34 8,-14 0,0 Z"/>
+        <path class="bq-petal" style="animation-delay:1.86s" transform="rotate(120)" d="M0,0 C-8,-14 -8,-34 0,-42 C8,-34 8,-14 0,0 Z"/>
+        <path class="bq-petal" style="animation-delay:1.94s" transform="rotate(180)" d="M0,0 C-8,-14 -8,-34 0,-42 C8,-34 8,-14 0,0 Z"/>
+        <path class="bq-petal" style="animation-delay:2.02s" transform="rotate(240)" d="M0,0 C-8,-14 -8,-34 0,-42 C8,-34 8,-14 0,0 Z"/>
+        <path class="bq-petal" style="animation-delay:2.10s" transform="rotate(300)" d="M0,0 C-8,-14 -8,-34 0,-42 C8,-34 8,-14 0,0 Z"/>
+        <circle class="bq-petal" style="animation-delay:2.2s" r="8"/>
+      </g>
+
+      <!-- flower 3 (blooms last) -->
+      <g style="color:#e6003f" transform="translate(188,150) scale(.85)">
+        <path class="bq-petal" style="animation-delay:2.00s" transform="rotate(0)"   d="M0,0 C-8,-14 -8,-34 0,-42 C8,-34 8,-14 0,0 Z"/>
+        <path class="bq-petal" style="animation-delay:2.08s" transform="rotate(60)"  d="M0,0 C-8,-14 -8,-34 0,-42 C8,-34 8,-14 0,0 Z"/>
+        <path class="bq-petal" style="animation-delay:2.16s" transform="rotate(120)" d="M0,0 C-8,-14 -8,-34 0,-42 C8,-34 8,-14 0,0 Z"/>
+        <path class="bq-petal" style="animation-delay:2.24s" transform="rotate(180)" d="M0,0 C-8,-14 -8,-34 0,-42 C8,-34 8,-14 0,0 Z"/>
+        <path class="bq-petal" style="animation-delay:2.32s" transform="rotate(240)" d="M0,0 C-8,-14 -8,-34 0,-42 C8,-34 8,-14 0,0 Z"/>
+        <path class="bq-petal" style="animation-delay:2.40s" transform="rotate(300)" d="M0,0 C-8,-14 -8,-34 0,-42 C8,-34 8,-14 0,0 Z"/>
+        <circle class="bq-petal" style="animation-delay:2.5s" r="8"/>
+      </g>
+
+      <!-- ribbon -->
+      <g style="color:#c9184a">
+        <path class="bq-petal" style="animation-delay:2.7s" d="M150,358 C126,340 118,318 138,308 C150,302 150,320 150,332 C150,320 150,302 162,308 C182,318 174,340 150,358 Z"/>
+        <circle class="bq-petal" style="animation-delay:2.9s" cx="150" cy="330" r="6"/>
+      </g>
+    </svg>
+  </div>
+
+  <p class="bouquet-sub">forever yours, forever mine</p>
+</section>
+
+<script>
+(function(){
+  "use strict";
+
+  // ---- fill a heart silhouette with tiny "i love you" text (precomputed points) ----
+  var pts = [
+    [93.8,57.5,'edge'],[96.8,50.0,'edge'],[99.3,41.4,'edge'],[100.0,32.0,'edge'],[99.1,22.1,'edge'],
+    [95.3,12.9,'edge'],[89.0,5.7,'edge'],[80.7,1.1,'edge'],[71.3,0.0,'edge'],[62.0,2.0,'edge'],
+    [53.6,6.3,'edge'],[46.4,6.3,'edge'],[38.0,2.0,'edge'],[28.7,0.0,'edge'],[19.3,1.1,'edge'],
+    [11.0,5.7,'edge'],[4.7,12.9,'edge'],[0.9,22.1,'edge'],[0.0,32.0,'edge'],[0.7,41.4,'edge'],
+    [3.2,50.0,'edge'],[6.2,57.5,'edge'],[9.4,63.9,'edge'],[13.2,69.5,'edge'],[16.9,74.3,'edge'],
+    [20.8,78.5,'edge'],[24.6,82.4,'edge'],[28.4,86.1,'edge'],[32.7,89.2,'edge'],[36.9,92.7,'edge'],
+    [41.7,96.1,'edge'],[47.0,100.0,'edge'],[53.0,100.0,'edge'],[58.3,96.1,'edge'],[63.1,92.7,'edge'],
+    [67.3,89.2,'edge'],[71.6,86.1,'edge'],[75.4,82.4,'edge'],[79.2,78.5,'edge'],[83.1,74.3,'edge'],
+    [86.8,69.5,'edge'],[90.6,63.9,'edge'],
+    [45.0,53.8,'fill'],[50.8,51.0,'fill'],[16.7,58.7,'fill'],[63.7,30.0,'fill'],[6.7,28.3,'fill'],
+    [66.3,48.1,'fill'],[43.7,24.9,'fill'],[52.0,45.6,'fill'],[50.0,43.3,'fill'],[45.5,82.5,'fill'],
+    [86.0,38.7,'fill'],[30.5,87.5,'fill'],[78.1,70.1,'fill'],[86.6,71.5,'fill'],[98.4,24.4,'fill'],
+    [4.9,46.7,'fill'],[99.0,33.5,'fill'],[56.3,65.3,'fill'],[17.3,36.2,'fill'],[11.0,45.2,'fill'],
+    [99.8,28.9,'fill'],[29.3,20.6,'fill'],[19.4,70.7,'fill'],[87.5,45.4,'fill'],[7.8,9.9,'fill'],
+    [78.8,77.3,'fill'],[6.7,51.4,'fill'],[22.8,49.5,'fill'],[36.4,64.7,'fill'],[57.9,22.5,'fill'],
+    [93.2,27.4,'fill'],[75.3,14.9,'fill'],[17.9,13.9,'fill'],[90.4,49.3,'fill'],[22.4,39.0,'fill'],
+    [24.3,26.8,'fill'],[60.2,81.0,'fill'],[15.7,37.4,'fill'],[56.3,23.9,'fill'],[62.1,82.3,'fill'],
+    [15.8,73.3,'fill'],[57.6,97.5,'fill'],[35.4,20.0,'fill'],[70.2,51.3,'fill'],[71.2,12.6,'fill'],
+    [48.1,36.3,'fill'],[30.9,8.9,'fill'],[5.1,55.2,'fill'],[75.0,19.0,'fill'],[75.1,39.1,'fill'],
+    [81.0,17.5,'fill'],[34.3,41.0,'fill'],[92.4,22.0,'fill'],[41.2,30.2,'fill'],[88.4,52.4,'fill'],
+    [63.2,71.9,'fill'],[58.7,48.8,'fill'],[5.6,45.6,'fill'],[74.1,71.3,'fill'],[74.8,51.6,'fill'],
+    [43.7,25.3,'fill'],[6.0,34.3,'fill'],[48.0,87.4,'fill'],[71.0,60.2,'fill'],[62.1,16.9,'fill'],
+    [29.0,41.7,'fill'],[92.9,43.5,'fill'],[43.9,19.9,'fill'],[31.7,42.9,'fill'],[18.1,66.9,'fill'],
+    [82.3,17.6,'fill'],[58.8,78.6,'fill'],[11.5,60.2,'fill'],[85.6,24.3,'fill'],[72.3,13.9,'fill'],
+    [44.8,82.8,'fill'],[19.8,68.7,'fill'],[63.3,60.5,'fill'],[30.5,25.3,'fill'],[72.1,52.7,'fill'],
+    [29.8,30.1,'fill'],[63.7,65.3,'fill'],[63.7,44.0,'fill'],[82.5,13.1,'fill'],[47.4,92.7,'fill'],
+    [25.9,75.6,'fill'],[70.9,57.8,'fill'],[62.1,33.7,'fill'],[38.7,30.1,'fill'],[95.7,37.2,'fill'],
+    [10.9,64.6,'fill'],[63.3,18.0,'fill'],[37.0,52.9,'fill'],[90.1,29.6,'fill'],[66.0,90.0,'fill'],
+    [73.5,27.4,'fill'],[65.0,37.7,'fill'],[19.7,19.0,'fill'],[53.9,30.2,'fill'],[31.0,18.0,'fill'],
+    [55.3,32.5,'fill'],[32.6,30.5,'fill'],[51.7,37.1,'fill'],[85.9,40.5,'fill'],[20.6,57.2,'fill'],
+    [27.8,36.5,'fill'],[64.7,57.6,'fill'],[86.3,53.8,'fill'],[30.1,72.0,'fill'],[86.5,19.0,'fill']
+  ];
+  var ring = document.getElementById('wordRing');
+  if(ring){
+    var frag = document.createDocumentFragment();
+    pts.forEach(function(p, i){
+      var el = document.createElement('span');
+      var isEdge = p[2] === 'edge';
+      el.className = isEdge ? 'edge' : 'fill';
+      el.textContent = 'i love you';
+      el.style.left = p[0] + '%';
+      el.style.top = p[1] + '%';
+      el.style.fontSize = (isEdge ? (0.56 + Math.random()*0.1) : (0.4 + Math.random()*0.24)).toFixed(2) + 'rem';
+      el.style.setProperty('--wd', (Math.random() * 1.1) + 's');
+      frag.appendChild(el);
+    });
+    ring.appendChild(frag);
+  }
+
+  // ---- lightweight floating background hearts (CSS-driven, no rAF loop) ----
+  var floaters = document.getElementById('floaters');
+  if(floaters){
+    var count = 12; // kept low for smooth performance on older devices
+    var frag2 = document.createDocumentFragment();
+    for(var i=0;i<count;i++){
+      var s = document.createElement('span');
+      s.className = 'heart-icon';
+      var size = (0.6 + Math.random()*1.1).toFixed(2) + 'rem';
+      var left = Math.round(Math.random()*94) + '%';
+      var dur = (9 + Math.random()*9).toFixed(1) + 's';
+      var delay = (Math.random()*10).toFixed(1) + 's';
+      var drift = Math.round(-40 + Math.random()*80) + 'px';
+      s.style.setProperty('--s', size);
+      s.style.setProperty('--x', left);
+      s.style.setProperty('--d', dur);
+      s.style.setProperty('--delay', delay);
+      s.style.setProperty('--drift', drift);
+      frag2.appendChild(s);
+    }
+    floaters.appendChild(frag2);
+  }
+
+  // ---- envelope open / letter reveal ----
+  var envelope = document.getElementById('envelope');
+  var letterCard = document.getElementById('letterCard');
+
+  function openLetter(){
+    envelope.classList.add('open');
+    letterCard.classList.add('show');
+    setTimeout(function(){
+      letterCard.scrollIntoView({behavior:'smooth', block:'center'});
+    }, 350);
+  }
+
+  if(envelope){
+    envelope.addEventListener('click', openLetter);
+    envelope.addEventListener('keypress', function(e){
+      if(e.key === 'Enter' || e.key === ' '){ openLetter(); }
+    });
+  }
+
+  // ---- trigger the bouquet bloom only once it's actually on screen ----
+  var bouquetSection = document.getElementById('bouquet');
+  if(bouquetSection){
+    if('IntersectionObserver' in window){
+      var bqObserver = new IntersectionObserver(function(entries, obs){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            bouquetSection.classList.add('in-view');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+      bqObserver.observe(bouquetSection);
+    } else {
+      // very old browsers without IntersectionObserver: just play it
+      bouquetSection.classList.add('in-view');
+    }
+  }
+
+  // ---- music: try to start on the very first tap/click anywhere on the page ----
+  var bgm = document.getElementById('bgm');
+  var musicBtn = document.getElementById('musicBtn');
+
+  function startMusicOnce(){
+    if(bgm && bgm.paused){
+      bgm.play().then(function(){
+        if(musicBtn){
+          musicBtn.classList.remove('paused');
+          musicBtn.setAttribute('aria-label','Pause music');
+        }
+      }).catch(function(){ /* file missing or still blocked — stays paused, button still works */ });
+    }
+    document.removeEventListener('click', startMusicOnce);
+    document.removeEventListener('touchstart', startMusicOnce);
+  }
+  document.addEventListener('click', startMusicOnce, { once:true });
+  document.addEventListener('touchstart', startMusicOnce, { once:true });
+
+  if(bgm && musicBtn){
+    musicBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      if(bgm.paused){
+        bgm.play().then(function(){
+          musicBtn.classList.remove('paused');
+          musicBtn.setAttribute('aria-label','Pause music');
+        }).catch(function(){});
+      } else {
+        bgm.pause();
+        musicBtn.classList.add('paused');
+        musicBtn.setAttribute('aria-label','Play music');
+      }
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
