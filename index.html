@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b070a">
+<title>Three Thousand Times</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{
+  background:#080608;
+  color:#fff;
+  font-family:Georgia,"Times New Roman",serif;
+}
+canvas{position:fixed;inset:0;width:100%;height:100%}
+#intro{
+  position:fixed;inset:0;z-index:10;background:#080608;
+  display:flex;align-items:center;justify-content:center;
+  transition:opacity 1.8s ease,visibility 1.8s;
+}
+#intro.hide{opacity:0;visibility:hidden}
+.intro{text-align:center;animation:intro 2s cubic-bezier(.2,.8,.2,1)}
+.intro .symbol{font-family:Arial;font-size:68px;color:#ff477f;
+  text-shadow:0 0 25px #ff174f,0 0 70px rgba(255,20,80,.5);
+  animation:pulse 1.8s infinite}
+.intro h1{font-size:clamp(25px,7vw,42px);font-weight:400;
+  letter-spacing:.12em;margin:20px 0 8px}
+.intro p{font:11px Arial,sans-serif;letter-spacing:.35em;text-transform:uppercase;
+  opacity:.45}
+@keyframes intro{from{opacity:0;transform:translateY(20px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes pulse{50%{transform:scale(1.1)}}
+
+#app{opacity:0;transition:opacity 2s ease}
+#app.show{opacity:1}
+.glow{
+  position:fixed;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at center,rgba(255,28,89,.12),transparent 45%),
+             radial-gradient(ellipse at center,transparent 48%,rgba(0,0,0,.7) 100%);
+}
+.center{
+  position:fixed;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;
+  pointer-events:none;text-align:center
+}
+.title{
+  font-size:clamp(35px,9vw,76px);font-weight:400;
+  letter-spacing:.025em;text-shadow:0 0 18px rgba(255,55,115,.8),0 0 55px rgba(255,0,65,.35);
+}
+.subtitle{
+  margin-top:13px;font:10px Arial,sans-serif;letter-spacing:.42em;
+  text-transform:uppercase;opacity:.5
+}
+#open{
+  position:fixed;z-index:4;bottom:7vh;left:50%;transform:translateX(-50%);
+  border:1px solid rgba(255,132,165,.42);background:rgba(255,255,255,.035);
+  color:#ffe8ef;border-radius:999px;padding:14px 25px;
+  font:12px Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;
+  backdrop-filter:blur(14px);cursor:pointer;transition:.35s;
+  box-shadow:0 0 35px rgba(255,20,85,.08)
+}
+#open:hover{background:rgba(255,30,90,.12);box-shadow:0 0 45px rgba(255,20,85,.2)}
+#hint{position:fixed;top:4.5vh;left:50%;transform:translateX(-50%);z-index:3;
+  font:9px Arial,sans-serif;letter-spacing:.3em;text-transform:uppercase;opacity:.28}
+
+#letterLayer{
+  position:fixed;inset:0;z-index:20;background:rgba(4,2,4,.78);
+  backdrop-filter:blur(18px);display:flex;align-items:center;justify-content:center;
+  padding:22px;opacity:0;visibility:hidden;transition:.8s ease
+}
+#letterLayer.open{opacity:1;visibility:visible}
+.letter{
+  width:min(680px,95vw);max-height:86vh;overflow:auto;
+  padding:clamp(28px,7vw,58px);
+  background:linear-gradient(145deg,#211017,#10090d);
+  border:1px solid rgba(255,151,176,.23);
+  box-shadow:0 30px 100px rgba(0,0,0,.65),0 0 80px rgba(255,18,76,.13);
+  border-radius:3px;
+  transform:translateY(30px);transition:1s cubic-bezier(.2,.8,.2,1);
+}
+#letterLayer.open .letter{transform:none}
+.date{text-align:right;font:10px Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#b88c99}
+.rose{text-align:center;font:32px Arial;color:#ff4d80;text-shadow:0 0 20px #ff1f60}
+.letter h2{text-align:center;font-size:clamp(30px,8vw,47px);font-weight:400;
+  margin:15px 0 30px;color:#ffe9ef}
+.salutation{font-size:21px;margin-bottom:22px;color:#ffd8e3}
+.letter p{font-size:clamp(16px,4vw,19px);line-height:1.95;color:#efdde2;margin:0 0 20px}
+.signature{text-align:right;margin-top:34px;font-size:21px;color:#ffc0d0}
+.smallheart{text-align:center;font:22px Arial;color:#ff4d80;margin-top:25px}
+#close{display:block;margin:30px auto 0;background:none;border:0;color:#bc8294;
+  font:10px Arial,sans-serif;letter-spacing:.25em;cursor:pointer}
+
+@media(max-height:650px){
+ .letter{max-height:82vh;padding:25px}
+ .letter p{line-height:1.7;margin-bottom:14px}
+}
+</style>
+</head>
+<body>
+
+<div id="intro">
+  <div class="intro">
+    <div class="symbol">♥</div>
+    <h1>For someone special</h1>
+    <p>take a moment</p>
+  </div>
+</div>
+
+<div id="app">
+  <canvas id="canvas"></canvas>
+  <div class="glow"></div>
+  <div class="center">
+    <div>
+      <div class="title">Love you.</div>
+      <div class="subtitle">three thousand times &nbsp;•&nbsp; and still counting</div>
+    </div>
+  </div>
+  <div id="hint">tap the heart</div>
+  <button id="open">♡ Read my letter</button>
+</div>
+
+<div id="letterLayer">
+  <article class="letter">
+    <div class="date">A little letter for you</div>
+    <div class="rose">♥</div>
+    <h2>To you,</h2>
+
+    <div id="letterText">
+      <div class="salutation">My dearest,</div>
+
+      <p>
+        If I could put everything I feel into words, I would probably run out of
+        paper long before I ran out of things to say. So I made this little
+        place for you instead — three thousand little “I love you”s, gathered
+        together to make one heart.
+      </p>
+
+      <p>
+        I love you in the quiet moments, when nothing needs to be said.
+        I love you in the silly moments that make absolutely no sense to anyone
+        else. I love the memories we already have, and I love the thought of
+        all the little moments that are still waiting for us.
+      </p>
+
+      <p>
+        There are so many beautiful things in this world, but somehow my heart
+        keeps choosing the thought of you. You have a way of making an ordinary
+        day feel a little warmer, a little softer, a little more worth
+        remembering.
+      </p>
+
+      <p>
+        I don't want this letter to promise some perfect story. I just want it
+        to say something simple and honest: <em>you matter to me.</em>
+        More than these three thousand words could ever explain.
+      </p>
+
+      <p>
+        So whenever you doubt how special you are, come back here.
+        Look at this heart and remember that every tiny “I love you” inside it
+        is carrying the same message:
+        <strong>I'm grateful that you exist.</strong>
+      </p>
+
+      <p>
+        And if I had to write it another three thousand times, I would.
+        Then another three thousand after that.
+      </p>
+
+      <div class="signature">
+        With all my heart,<br>
+        <span>♡</span>
+      </div>
+      <div class="smallheart">♥</div>
+    </div>
+    <button id="close">CLOSE LETTER</button>
+  </article>
+</div>
+
+<script>
+const c=document.getElementById("canvas"),ctx=c.getContext("2d");
+let W,H,D,items=[],dust=[],t0=performance.now();
+
+function resize(){
+  D=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;
+  c.width=W*D;c.height=H*D;c.style.width=W+"px";c.style.height=H+"px";
+  ctx.setTransform(D,0,0,D,0,0);make();
+}
+function hp(t,s){
+  return {
+    x:W/2+16*Math.sin(t)**3*s,
+    y:H/2-(13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t))*s
+  }
+}
+function make(){
+  items=[];dust=[];
+  const s=Math.min(W,H)*.0158;
+  // 3000 individual love particles.
+  for(let i=0;i<3000;i++){
+    const a=Math.random()*Math.PI*2;
+    const p=hp(a,s);
+    // A little thickness keeps the heart looking like a cloud of words.
+    const spread=Math.pow(Math.random(),1.8)*Math.min(W,H)*.052;
+    const ang=Math.random()*Math.PI*2;
+    items.push({
+      tx:p.x+Math.cos(ang)*spread,ty:p.y+Math.sin(ang)*spread,
+      x:W/2+(Math.random()-.5)*W*1.35,
+      y:H/2+(Math.random()-.5)*H*1.35,
+      size:5+Math.random()*4.7,
+      delay:Math.random()*2.8,
+      phase:Math.random()*6.28,
+      speed:.35+Math.random()*.9,
+      alpha:.25+Math.random()*.7,
+      word:Math.random()<.94?"I LOVE YOU":"LOVE"
+    });
+  }
+  for(let i=0;i<150;i++)dust.push({
+    x:Math.random()*W,y:Math.random()*H,r:.3+Math.random()*1.2,
+    a:.1+Math.random()*.35,p:Math.random()*6.28
+  });
+}
+function frame(now){
+  const time=(now-t0)/1000;
+  ctx.clearRect(0,0,W,H);
+  for(const d of dust){
+    ctx.fillStyle=`rgba(255,120,160,${d.a*(.6+.4*Math.sin(time+d.p))})`;
+    ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);ctx.fill();
+  }
+  for(const p of items){
+    let q=Math.max(0,Math.min(1,(time-p.delay)/2.7));
+    q=1-Math.pow(1-q,4);
+    const float=Math.sin(time*p.speed+p.phase)*2;
+    const x=p.x+(p.tx-p.x)*q;
+    const y=p.y+(p.ty-p.y)*q+float;
+    ctx.font=`600 ${p.size}px Georgia,serif`;
+    ctx.textAlign="center";ctx.textBaseline="middle";
+    ctx.shadowColor="rgba(255,25,90,.72)";ctx.shadowBlur=8;
+    ctx.fillStyle=`rgba(255,${55+Math.floor(p.alpha*45)},${105+Math.floor(p.alpha*70)},${p.alpha*q})`;
+    ctx.fillText(p.word,x,y);
+  }
+  ctx.shadowBlur=0;requestAnimationFrame(frame);
+}
+resize();addEventListener("resize",resize);requestAnimationFrame(frame);
+
+setTimeout(()=>{
+ document.getElementById("intro").classList.add("hide");
+ document.getElementById("app").classList.add("show");
+},2800);
+
+const layer=document.getElementById("letterLayer");
+function openLetter(){layer.classList.add("open")}
+document.getElementById("open").onclick=openLetter;
+document.getElementById("canvas").onclick=openLetter;
+document.getElementById("close").onclick=()=>layer.classList.remove("open");
+layer.onclick=e=>{if(e.target===layer)layer.classList.remove("open")};
+</script>
+</body>
+</html>
