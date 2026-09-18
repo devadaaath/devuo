@@ -1,257 +1,1078 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ml">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0b070a">
-<title>Three Thousand Times</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#12070d">
+
+<title>For Devatheertha ♡</title>
+
 <style>
-*{box-sizing:border-box}
-html,body{margin:0;width:100%;height:100%;overflow:hidden}
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+  margin:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+}
+
 body{
-  background:#080608;
+  background:#090609;
   color:#fff;
   font-family:Georgia,"Times New Roman",serif;
 }
-canvas{position:fixed;inset:0;width:100%;height:100%}
+
+/* =========================
+   INTRO
+========================= */
+
 #intro{
-  position:fixed;inset:0;z-index:10;background:#080608;
-  display:flex;align-items:center;justify-content:center;
-  transition:opacity 1.8s ease,visibility 1.8s;
+  position:fixed;
+  inset:0;
+  z-index:50;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(circle at center,#260914 0%,#10070d 35%,#090609 75%);
+  transition:opacity 1.6s ease,visibility 1.6s ease;
 }
-#intro.hide{opacity:0;visibility:hidden}
-.intro{text-align:center;animation:intro 2s cubic-bezier(.2,.8,.2,1)}
-.intro .symbol{font-family:Arial;font-size:68px;color:#ff477f;
-  text-shadow:0 0 25px #ff174f,0 0 70px rgba(255,20,80,.5);
-  animation:pulse 1.8s infinite}
-.intro h1{font-size:clamp(25px,7vw,42px);font-weight:400;
-  letter-spacing:.12em;margin:20px 0 8px}
-.intro p{font:11px Arial,sans-serif;letter-spacing:.35em;text-transform:uppercase;
-  opacity:.45}
-@keyframes intro{from{opacity:0;transform:translateY(20px) scale(.96)}to{opacity:1;transform:none}}
-@keyframes pulse{50%{transform:scale(1.1)}}
 
-#app{opacity:0;transition:opacity 2s ease}
-#app.show{opacity:1}
-.glow{
-  position:fixed;inset:0;pointer-events:none;
-  background:radial-gradient(ellipse at center,rgba(255,28,89,.12),transparent 45%),
-             radial-gradient(ellipse at center,transparent 48%,rgba(0,0,0,.7) 100%);
+#intro.hide{
+  opacity:0;
+  visibility:hidden;
 }
-.center{
-  position:fixed;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;
-  pointer-events:none;text-align:center
-}
-.title{
-  font-size:clamp(35px,9vw,76px);font-weight:400;
-  letter-spacing:.025em;text-shadow:0 0 18px rgba(255,55,115,.8),0 0 55px rgba(255,0,65,.35);
-}
-.subtitle{
-  margin-top:13px;font:10px Arial,sans-serif;letter-spacing:.42em;
-  text-transform:uppercase;opacity:.5
-}
-#open{
-  position:fixed;z-index:4;bottom:7vh;left:50%;transform:translateX(-50%);
-  border:1px solid rgba(255,132,165,.42);background:rgba(255,255,255,.035);
-  color:#ffe8ef;border-radius:999px;padding:14px 25px;
-  font:12px Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;
-  backdrop-filter:blur(14px);cursor:pointer;transition:.35s;
-  box-shadow:0 0 35px rgba(255,20,85,.08)
-}
-#open:hover{background:rgba(255,30,90,.12);box-shadow:0 0 45px rgba(255,20,85,.2)}
-#hint{position:fixed;top:4.5vh;left:50%;transform:translateX(-50%);z-index:3;
-  font:9px Arial,sans-serif;letter-spacing:.3em;text-transform:uppercase;opacity:.28}
 
-#letterLayer{
-  position:fixed;inset:0;z-index:20;background:rgba(4,2,4,.78);
-  backdrop-filter:blur(18px);display:flex;align-items:center;justify-content:center;
-  padding:22px;opacity:0;visibility:hidden;transition:.8s ease
+.introBox{
+  text-align:center;
+  animation:introIn 2s ease;
 }
-#letterLayer.open{opacity:1;visibility:visible}
+
+.introHeart{
+  font-family:Arial,sans-serif;
+  font-size:72px;
+  color:#ff477f;
+  text-shadow:
+    0 0 15px #ff477f,
+    0 0 40px rgba(255,25,90,.65);
+  animation:heartBeat 1.8s ease-in-out infinite;
+}
+
+.introTitle{
+  margin-top:18px;
+  font-size:28px;
+  font-weight:400;
+  letter-spacing:.12em;
+}
+
+.introSub{
+  margin-top:12px;
+  font-family:Arial,sans-serif;
+  font-size:9px;
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  opacity:.4;
+}
+
+@keyframes introIn{
+  from{
+    opacity:0;
+    transform:translateY(20px) scale(.96);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
+@keyframes heartBeat{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.1)}
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+#page{
+  position:fixed;
+  inset:0;
+  opacity:0;
+  transition:opacity 1.6s ease;
+}
+
+#page.show{
+  opacity:1;
+}
+
+canvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+}
+
+.background{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(255,25,90,.11),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      transparent 48%,
+      rgba(0,0,0,.72) 100%
+    );
+}
+
+
+/* =========================
+   CENTER
+========================= */
+
+.centerText{
+  position:absolute;
+  inset:0;
+  z-index:5;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  pointer-events:none;
+  text-align:center;
+}
+
+.loveTitle{
+  font-size:clamp(38px,10vw,82px);
+  font-weight:400;
+
+  color:#fff4f7;
+
+  text-shadow:
+    0 0 12px rgba(255,65,120,.8),
+    0 0 35px rgba(255,0,70,.4);
+}
+
+.loveSub{
+  margin-top:12px;
+
+  font-family:Arial,sans-serif;
+  font-size:9px;
+  letter-spacing:.38em;
+  text-transform:uppercase;
+
+  color:#ffc4d4;
+  opacity:.5;
+}
+
+
+/* =========================
+   FLOATING HEARTS
+========================= */
+
+.floatingHeart{
+  position:absolute;
+  z-index:3;
+  color:#ff3973;
+  font-family:Arial,sans-serif;
+  pointer-events:none;
+  opacity:0;
+
+  text-shadow:
+    0 0 8px #ff3973,
+    0 0 20px rgba(255,30,90,.6);
+
+  animation:floatUp linear infinite;
+}
+
+.h1{left:12%;bottom:-30px;font-size:15px;animation-duration:8s;animation-delay:1s}
+.h2{left:25%;bottom:-30px;font-size:9px;animation-duration:11s;animation-delay:4s}
+.h3{left:72%;bottom:-30px;font-size:13px;animation-duration:9s;animation-delay:2s}
+.h4{left:88%;bottom:-30px;font-size:8px;animation-duration:12s;animation-delay:6s}
+.h5{left:55%;bottom:-30px;font-size:11px;animation-duration:10s;animation-delay:5s}
+
+@keyframes floatUp{
+  0%{
+    transform:translateY(0) scale(.7) rotate(0deg);
+    opacity:0;
+  }
+
+  15%{
+    opacity:.5;
+  }
+
+  75%{
+    opacity:.35;
+  }
+
+  100%{
+    transform:translateY(-110vh) scale(1.1) rotate(18deg);
+    opacity:0;
+  }
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+#letterButton{
+  position:absolute;
+  z-index:10;
+
+  left:50%;
+  bottom:7vh;
+
+  transform:translateX(-50%);
+
+  padding:14px 25px;
+
+  border:1px solid rgba(255,145,175,.38);
+  border-radius:999px;
+
+  color:#ffe8ef;
+  background:rgba(255,255,255,.035);
+
+  font-family:Arial,sans-serif;
+  font-size:10px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 0 25px rgba(255,20,80,.08);
+
+  transition:transform .25s ease,
+             background .25s ease;
+}
+
+#letterButton:active{
+  transform:translateX(-50%) scale(.95);
+  background:rgba(255,35,95,.12);
+}
+
+
+/* =========================
+   LETTER OVERLAY
+========================= */
+
+#letterOverlay{
+  position:fixed;
+  inset:0;
+  z-index:100;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:20px;
+
+  background:rgba(5,2,5,.82);
+
+  opacity:0;
+  visibility:hidden;
+
+  transition:
+    opacity .65s ease,
+    visibility .65s ease;
+}
+
+#letterOverlay.open{
+  opacity:1;
+  visibility:visible;
+}
+
+
+/* =========================
+   LETTER
+========================= */
+
 .letter{
-  width:min(680px,95vw);max-height:86vh;overflow:auto;
-  padding:clamp(28px,7vw,58px);
-  background:linear-gradient(145deg,#211017,#10090d);
-  border:1px solid rgba(255,151,176,.23);
-  box-shadow:0 30px 100px rgba(0,0,0,.65),0 0 80px rgba(255,18,76,.13);
-  border-radius:3px;
-  transform:translateY(30px);transition:1s cubic-bezier(.2,.8,.2,1);
-}
-#letterLayer.open .letter{transform:none}
-.date{text-align:right;font:10px Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#b88c99}
-.rose{text-align:center;font:32px Arial;color:#ff4d80;text-shadow:0 0 20px #ff1f60}
-.letter h2{text-align:center;font-size:clamp(30px,8vw,47px);font-weight:400;
-  margin:15px 0 30px;color:#ffe9ef}
-.salutation{font-size:21px;margin-bottom:22px;color:#ffd8e3}
-.letter p{font-size:clamp(16px,4vw,19px);line-height:1.95;color:#efdde2;margin:0 0 20px}
-.signature{text-align:right;margin-top:34px;font-size:21px;color:#ffc0d0}
-.smallheart{text-align:center;font:22px Arial;color:#ff4d80;margin-top:25px}
-#close{display:block;margin:30px auto 0;background:none;border:0;color:#bc8294;
-  font:10px Arial,sans-serif;letter-spacing:.25em;cursor:pointer}
+  width:min(650px,94vw);
+  max-height:88vh;
 
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+
+  padding:
+    clamp(27px,7vw,55px)
+    clamp(23px,7vw,55px);
+
+  background:
+    linear-gradient(
+      145deg,
+      #251017,
+      #12090e
+    );
+
+  border:1px solid rgba(255,155,180,.22);
+
+  box-shadow:
+    0 25px 70px rgba(0,0,0,.7),
+    0 0 70px rgba(255,20,80,.12);
+
+  border-radius:4px;
+
+  transform:translateY(25px) scale(.98);
+
+  transition:
+    transform .7s cubic-bezier(.2,.8,.2,1);
+}
+
+#letterOverlay.open .letter{
+  transform:none;
+}
+
+
+/* Letter decorations */
+
+.topHeart{
+  text-align:center;
+
+  color:#ff477c;
+  font-family:Arial,sans-serif;
+  font-size:29px;
+
+  text-shadow:
+    0 0 12px #ff2769,
+    0 0 25px rgba(255,20,80,.5);
+}
+
+.line{
+  width:70px;
+  height:1px;
+
+  margin:18px auto 25px;
+
+  background:rgba(255,125,155,.35);
+}
+
+.letterTitle{
+  text-align:center;
+
+  font-size:clamp(31px,8vw,47px);
+  font-weight:400;
+
+  color:#ffe8ee;
+
+  margin:0 0 25px;
+}
+
+.letterGreeting{
+  /*
+    Romantic-looking Malayalam-friendly stack.
+    No external font = no downloading/buffering.
+  */
+  font-family:
+    "Noto Serif Malayalam",
+    "Noto Sans Malayalam",
+    "Nirmala UI",
+    "Kartika",
+    serif;
+
+  font-size:clamp(19px,5vw,23px);
+
+  color:#ffd4df;
+
+  margin-bottom:24px;
+}
+
+.letterText{
+  font-family:
+    "Noto Serif Malayalam",
+    "Noto Sans Malayalam",
+    "Nirmala UI",
+    "Kartika",
+    serif;
+
+  font-size:clamp(17px,4.5vw,20px);
+
+  line-height:2;
+
+  color:#f2dfe5;
+
+  text-align:left;
+}
+
+.letterText p{
+  margin:0 0 22px;
+}
+
+.highlight{
+  color:#ffb4c9;
+}
+
+.signature{
+  margin-top:32px;
+
+  text-align:right;
+
+  font-family:
+    "Noto Serif Malayalam",
+    "Noto Sans Malayalam",
+    "Nirmala UI",
+    serif;
+
+  font-size:19px;
+
+  line-height:1.8;
+
+  color:#ffc0d0;
+}
+
+.signatureName{
+  font-family:
+    "Brush Script MT",
+    "Segoe Script",
+    cursive;
+
+  font-size:26px;
+  color:#ff9fba;
+}
+
+.bottomHeart{
+  margin-top:25px;
+
+  text-align:center;
+
+  color:#ff477c;
+
+  font:20px Arial,sans-serif;
+
+  text-shadow:0 0 15px #ff2868;
+}
+
+#closeLetter{
+  display:block;
+
+  margin:28px auto 0;
+
+  border:0;
+  background:none;
+
+  color:#a97988;
+
+  font:9px Arial,sans-serif;
+
+  letter-spacing:.25em;
+
+  cursor:pointer;
+}
+
+
+/* Small phones */
 @media(max-height:650px){
- .letter{max-height:82vh;padding:25px}
- .letter p{line-height:1.7;margin-bottom:14px}
+
+  .letter{
+    max-height:84vh;
+    padding:24px;
+  }
+
+  .letterText{
+    line-height:1.75;
+  }
+
+  .letterText p{
+    margin-bottom:16px;
+  }
+
+  .letterTitle{
+    margin-bottom:18px;
+  }
 }
 </style>
 </head>
+
+
 <body>
 
+
+<!-- =========================
+     INTRO
+========================= -->
+
 <div id="intro">
-  <div class="intro">
-    <div class="symbol">♥</div>
-    <h1>For someone special</h1>
-    <p>take a moment</p>
+
+  <div class="introBox">
+
+    <div class="introHeart">♥</div>
+
+    <div class="introTitle">
+      For Devatheertha
+    </div>
+
+    <div class="introSub">
+      something from my heart
+    </div>
+
   </div>
+
 </div>
 
-<div id="app">
-  <canvas id="canvas"></canvas>
-  <div class="glow"></div>
-  <div class="center">
+
+<!-- =========================
+     MAIN PAGE
+========================= -->
+
+<div id="page">
+
+  <canvas id="heartCanvas"></canvas>
+
+  <div class="background"></div>
+
+
+  <!-- Floating hearts -->
+
+  <div class="floatingHeart h1">♥</div>
+  <div class="floatingHeart h2">♡</div>
+  <div class="floatingHeart h3">♥</div>
+  <div class="floatingHeart h4">♡</div>
+  <div class="floatingHeart h5">♥</div>
+
+
+  <!-- Center -->
+
+  <div class="centerText">
+
     <div>
-      <div class="title">Love you.</div>
-      <div class="subtitle">three thousand times &nbsp;•&nbsp; and still counting</div>
-    </div>
-  </div>
-  <div id="hint">tap the heart</div>
-  <button id="open">♡ Read my letter</button>
-</div>
 
-<div id="letterLayer">
-  <article class="letter">
-    <div class="date">A little letter for you</div>
-    <div class="rose">♥</div>
-    <h2>To you,</h2>
-
-    <div id="letterText">
-      <div class="salutation">My dearest,</div>
-
-      <p>
-        If I could put everything I feel into words, I would probably run out of
-        paper long before I ran out of things to say. So I made this little
-        place for you instead — three thousand little “I love you”s, gathered
-        together to make one heart.
-      </p>
-
-      <p>
-        I love you in the quiet moments, when nothing needs to be said.
-        I love you in the silly moments that make absolutely no sense to anyone
-        else. I love the memories we already have, and I love the thought of
-        all the little moments that are still waiting for us.
-      </p>
-
-      <p>
-        There are so many beautiful things in this world, but somehow my heart
-        keeps choosing the thought of you. You have a way of making an ordinary
-        day feel a little warmer, a little softer, a little more worth
-        remembering.
-      </p>
-
-      <p>
-        I don't want this letter to promise some perfect story. I just want it
-        to say something simple and honest: <em>you matter to me.</em>
-        More than these three thousand words could ever explain.
-      </p>
-
-      <p>
-        So whenever you doubt how special you are, come back here.
-        Look at this heart and remember that every tiny “I love you” inside it
-        is carrying the same message:
-        <strong>I'm grateful that you exist.</strong>
-      </p>
-
-      <p>
-        And if I had to write it another three thousand times, I would.
-        Then another three thousand after that.
-      </p>
-
-      <div class="signature">
-        With all my heart,<br>
-        <span>♡</span>
+      <div class="loveTitle">
+        Love you.
       </div>
-      <div class="smallheart">♥</div>
+
+      <div class="loveSub">
+        three thousand times • still not enough
+      </div>
+
     </div>
-    <button id="close">CLOSE LETTER</button>
-  </article>
+
+  </div>
+
+
+  <button id="letterButton">
+    ♡ Read my letter
+  </button>
+
 </div>
+
+
+<!-- =========================
+     LETTER
+========================= -->
+
+<div id="letterOverlay">
+
+  <article class="letter">
+
+    <div class="topHeart">♥</div>
+
+    <div class="line"></div>
+
+    <h1 class="letterTitle">
+      For you, Devatheertha
+    </h1>
+
+
+    <div class="letterGreeting">
+      Oi myy lovveyyy,
+    </div>
+
+
+    <div class="letterText">
+
+      <p>
+        ഞാനിത് എഴുതുന്നത്
+        <span class="highlight">നിന്നെ മിസ്സ് ചെയ്യുന്നതുകൊണ്ടാണ്..</span>
+        എൻറെ ജീവിതത്തിലെ ഓരോ ദിവസവും തുടങ്ങുമ്പോഴും അവസാനിക്കുമ്പോഴും
+        എൻറെ ആദ്യത്തെയും അവസാനത്തെയും ചിന്തയാണ് നീ..
+        ആ നിന്നെ കാണാൻ കഴിയാതെയുള്ള ഈ ജീവിതം
+        നന്നേ മടുപ്പുള്ളതാണ്....
+      </p>
+
+
+      <p>
+        ഈ ജീവിതയാത്ര ആരോടൊപ്പം എന്ന ചോദ്യത്തിൽ
+        എനിക്ക് ഒരു ഉത്തരം മാത്രമേ ഉള്ളൂ.
+        ആ ഉത്തരമാണ്
+        <span class="highlight">നീ...</span>
+      </p>
+
+
+      <p>
+        പ്രിയപ്പെട്ടവൾ
+        <span class="highlight">Devatheertha</span>
+        ക്ക്..
+      </p>
+
+    </div>
+
+
+    <div class="signature">
+
+      സ്നേഹത്തോടെ,<br>
+
+      <span class="signatureName">
+        ~ Devadath
+      </span>
+
+    </div>
+
+
+    <div class="bottomHeart">
+      ♥
+    </div>
+
+
+    <button id="closeLetter">
+      CLOSE LETTER
+    </button>
+
+  </article>
+
+</div>
+
 
 <script>
-const c=document.getElementById("canvas"),ctx=c.getContext("2d");
-let W,H,D,items=[],dust=[],t0=performance.now();
+
+/*
+=========================================================
+ PERFORMANCE DESIGN
+=========================================================
+
+• Exactly 3000 "I LOVE YOU" words.
+• They are rendered ONCE to an off-screen canvas.
+• We do NOT redraw 3000 text objects every frame.
+• Only the finished canvas is animated.
+• devicePixelRatio is capped at 1.5.
+• No external libraries.
+• No external fonts.
+• No images.
+• No video.
+• No audio.
+• Designed for older phones.
+=========================================================
+*/
+
+
+const canvas =
+  document.getElementById("heartCanvas");
+
+const ctx =
+  canvas.getContext("2d");
+
+
+let W = 0;
+let H = 0;
+let heartLayer = null;
+
+let startTime =
+  performance.now();
+
+
+/* =========================
+   RESIZE
+========================= */
 
 function resize(){
-  D=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;
-  c.width=W*D;c.height=H*D;c.style.width=W+"px";c.style.height=H+"px";
-  ctx.setTransform(D,0,0,D,0,0);make();
+
+  W = window.innerWidth;
+  H = window.innerHeight;
+
+  /*
+    1x is enough for older devices.
+    1.5x gives better quality on newer phones.
+  */
+
+  const dpr =
+    Math.min(
+      window.devicePixelRatio || 1,
+      1.5
+    );
+
+  canvas.width =
+    W * dpr;
+
+  canvas.height =
+    H * dpr;
+
+  canvas.style.width =
+    W + "px";
+
+  canvas.style.height =
+    H + "px";
+
+  ctx.setTransform(
+    dpr,
+    0,
+    0,
+    dpr,
+    0,
+    0
+  );
+
+  createHeart();
+
 }
-function hp(t,s){
-  return {
-    x:W/2+16*Math.sin(t)**3*s,
-    y:H/2-(13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t))*s
-  }
+
+
+/* =========================
+   HEART EQUATION
+========================= */
+
+function heartPoint(t,scale){
+
+  const x =
+    16 *
+    Math.pow(Math.sin(t),3);
+
+  const y =
+    13 * Math.cos(t)
+    - 5 * Math.cos(2*t)
+    - 2 * Math.cos(3*t)
+    - Math.cos(4*t);
+
+  return{
+
+    x:
+      W/2 + x*scale,
+
+    y:
+      H/2 - y*scale
+
+  };
+
 }
-function make(){
-  items=[];dust=[];
-  const s=Math.min(W,H)*.0158;
-  // 3000 individual love particles.
+
+
+/* =========================
+   CREATE HEART
+========================= */
+
+function createHeart(){
+
+  heartLayer =
+    document.createElement("canvas");
+
+  heartLayer.width =
+    W;
+
+  heartLayer.height =
+    H;
+
+  const hctx =
+    heartLayer.getContext("2d");
+
+
+  /*
+    LARGE HEART
+  */
+
+  const scale =
+    Math.min(W,H) * .018;
+
+
+  /*
+    3000 LOVE YOUs.
+  */
+
   for(let i=0;i<3000;i++){
-    const a=Math.random()*Math.PI*2;
-    const p=hp(a,s);
-    // A little thickness keeps the heart looking like a cloud of words.
-    const spread=Math.pow(Math.random(),1.8)*Math.min(W,H)*.052;
-    const ang=Math.random()*Math.PI*2;
-    items.push({
-      tx:p.x+Math.cos(ang)*spread,ty:p.y+Math.sin(ang)*spread,
-      x:W/2+(Math.random()-.5)*W*1.35,
-      y:H/2+(Math.random()-.5)*H*1.35,
-      size:5+Math.random()*4.7,
-      delay:Math.random()*2.8,
-      phase:Math.random()*6.28,
-      speed:.35+Math.random()*.9,
-      alpha:.25+Math.random()*.7,
-      word:Math.random()<.94?"I LOVE YOU":"LOVE"
-    });
+
+    const t =
+      Math.random() *
+      Math.PI * 2;
+
+
+    const point =
+      heartPoint(
+        t,
+        scale
+      );
+
+
+    /*
+      Thickness.
+    */
+
+    const spread =
+      Math.pow(
+        Math.random(),
+        1.7
+      ) *
+      Math.min(W,H) *
+      .065;
+
+
+    const angle =
+      Math.random() *
+      Math.PI * 2;
+
+
+    const x =
+      point.x +
+      Math.cos(angle) *
+      spread;
+
+
+    const y =
+      point.y +
+      Math.sin(angle) *
+      spread;
+
+
+    const size =
+      4.2 +
+      Math.random() * 3.2;
+
+
+    hctx.font =
+      "600 " +
+      size +
+      "px Georgia";
+
+
+    hctx.textAlign =
+      "center";
+
+    hctx.textBaseline =
+      "middle";
+
+
+    /*
+      Slightly varied pink/red.
+    */
+
+    const r =
+      245 +
+      Math.floor(Math.random()*10);
+
+    const g =
+      48 +
+      Math.floor(Math.random()*55);
+
+    const b =
+      95 +
+      Math.floor(Math.random()*65);
+
+
+    const alpha =
+      .28 +
+      Math.random()*.55;
+
+
+    hctx.fillStyle =
+      `rgba(${r},${g},${b},${alpha})`;
+
+
+    hctx.fillText(
+      Math.random() < .97
+        ? "I LOVE YOU"
+        : "LOVE",
+      x,
+      y
+    );
+
   }
-  for(let i=0;i<150;i++)dust.push({
-    x:Math.random()*W,y:Math.random()*H,r:.3+Math.random()*1.2,
-    a:.1+Math.random()*.35,p:Math.random()*6.28
-  });
+
 }
-function frame(now){
-  const time=(now-t0)/1000;
-  ctx.clearRect(0,0,W,H);
-  for(const d of dust){
-    ctx.fillStyle=`rgba(255,120,160,${d.a*(.6+.4*Math.sin(time+d.p))})`;
-    ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);ctx.fill();
-  }
-  for(const p of items){
-    let q=Math.max(0,Math.min(1,(time-p.delay)/2.7));
-    q=1-Math.pow(1-q,4);
-    const float=Math.sin(time*p.speed+p.phase)*2;
-    const x=p.x+(p.tx-p.x)*q;
-    const y=p.y+(p.ty-p.y)*q+float;
-    ctx.font=`600 ${p.size}px Georgia,serif`;
-    ctx.textAlign="center";ctx.textBaseline="middle";
-    ctx.shadowColor="rgba(255,25,90,.72)";ctx.shadowBlur=8;
-    ctx.fillStyle=`rgba(255,${55+Math.floor(p.alpha*45)},${105+Math.floor(p.alpha*70)},${p.alpha*q})`;
-    ctx.fillText(p.word,x,y);
-  }
-  ctx.shadowBlur=0;requestAnimationFrame(frame);
+
+
+/* =========================
+   SMOOTH ANIMATION
+========================= */
+
+function animate(now){
+
+  const elapsed =
+    (now-startTime)/1000;
+
+
+  ctx.clearRect(
+    0,
+    0,
+    W,
+    H
+  );
+
+
+  /*
+    Heart forms smoothly.
+  */
+
+  let progress =
+    Math.min(
+      elapsed/3.2,
+      1
+    );
+
+
+  /*
+    Smooth cubic easing.
+  */
+
+  const eased =
+    1 -
+    Math.pow(
+      1-progress,
+      3
+    );
+
+
+  /*
+    Gentle breathing.
+  */
+
+  const breathing =
+    1 +
+    Math.sin(
+      elapsed*.8
+    ) * .006;
+
+
+  ctx.save();
+
+
+  ctx.globalAlpha =
+    eased;
+
+
+  ctx.translate(
+    W/2,
+    H/2
+  );
+
+
+  ctx.scale(
+    breathing,
+    breathing
+  );
+
+
+  ctx.translate(
+    -W/2,
+    -H/2
+  );
+
+
+  ctx.drawImage(
+    heartLayer,
+    0,
+    0,
+    W,
+    H
+  );
+
+
+  ctx.restore();
+
+
+  requestAnimationFrame(
+    animate
+  );
+
 }
-resize();addEventListener("resize",resize);requestAnimationFrame(frame);
+
+
+/* Start */
+
+resize();
+
+window.addEventListener(
+  "resize",
+  resize,
+  {passive:true}
+);
+
+requestAnimationFrame(
+  animate
+);
+
+
+/* =========================
+   INTRO FADE
+========================= */
 
 setTimeout(()=>{
- document.getElementById("intro").classList.add("hide");
- document.getElementById("app").classList.add("show");
+
+  document
+    .getElementById("intro")
+    .classList.add("hide");
+
+
+  document
+    .getElementById("page")
+    .classList.add("show");
+
 },2800);
 
-const layer=document.getElementById("letterLayer");
-function openLetter(){layer.classList.add("open")}
-document.getElementById("open").onclick=openLetter;
-document.getElementById("canvas").onclick=openLetter;
-document.getElementById("close").onclick=()=>layer.classList.remove("open");
-layer.onclick=e=>{if(e.target===layer)layer.classList.remove("open")};
+
+/* =========================
+   LETTER
+========================= */
+
+const overlay =
+  document.getElementById(
+    "letterOverlay"
+  );
+
+const openButton =
+  document.getElementById(
+    "letterButton"
+  );
+
+const closeButton =
+  document.getElementById(
+    "closeLetter"
+  );
+
+
+openButton.addEventListener(
+  "click",
+  ()=>{
+    overlay.classList.add("open");
+  }
+);
+
+
+closeButton.addEventListener(
+  "click",
+  ()=>{
+    overlay.classList.remove("open");
+  }
+);
+
+
+/*
+  Tap outside the letter to close.
+*/
+
+overlay.addEventListener(
+  "click",
+  (event)=>{
+
+    if(event.target === overlay){
+
+      overlay.classList.remove(
+        "open"
+      );
+
+    }
+
+  }
+);
+
 </script>
+
 </body>
-</html>
+  </html>
